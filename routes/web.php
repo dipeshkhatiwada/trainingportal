@@ -20,6 +20,9 @@ Route::get('/login','App\Http\Controllers\AdminController@login')->name('admin.l
 Route::post('/login','App\Http\Controllers\AdminController@store')->name('login');
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard','App\Http\Controllers\AdminController@dashboard')->name('dashboard');
 
+//catgory route
+Route::get('/admin/category/create','App\Http\Controllers\CategoryController@create')->name('admin.category.create');
+Route::get('/admin/category','App\Http\Controllers\CategoryController@index')->name('admin.category.index');
 //
 //Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //    return Inertia\Inertia::render('Dashboard');

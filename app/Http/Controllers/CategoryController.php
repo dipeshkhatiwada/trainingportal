@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -13,7 +14,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.category.index');
+        $data=[];
+        $data['categories']=Category::all();
+//        dd($data['categories']);
+        return view('admin.category.index',compact('data'));
     }
 
     /**
@@ -34,7 +38,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = Category::create($request->all());
+        if ($data){
+            $request->session()->flash('success_message','Category created Successfully  ! ');
+            return redirect()->route('admin.category.index');
+
+        }else{
+            $request->session()->flash('error_message','Something went wrong  ! ');
+            return redirect()->route('admin.category.create');
+        }
     }
 
     /**

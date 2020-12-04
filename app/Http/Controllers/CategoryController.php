@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,7 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
         $data = Category::create($request->all());
         if ($data){
@@ -66,9 +67,15 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
-        //
+        $data = Category::find($id);
+        if ($data){
+            return view('admin.category.edit',compact('data'));
+        }else{
+            $request->session()->flash('error_message','Something went wrong  ! ');
+            return redirect()->route('admin.category.index');
+        }
     }
 
     /**
@@ -80,7 +87,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = Category::find($id);
+        if ($data->update($request->all())){
+            $request->session()->flash('success_message','Category updated Successfully  ! ');
+            return redirect()->route('admin.category.index');
+        }else{
+            $request->session()->flash('error_message','Something went wrong  ! ');
+            return redirect()->route('admin.category.index');
+        }
     }
 
     /**
@@ -89,8 +103,16 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-        //
+        $cat = Category::find($id);
+        if ($cat->delete()){
+            $request->session()->flash('success_message','Category deleted Successfully  ! ');
+            return redirect()->route('admin.category.index');
+
+        }else{
+            $request->session()->flash('error_message','Something went wrong  ! ');
+            return redirect()->route('admin.category.create');
+        }
     }
 }

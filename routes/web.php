@@ -24,6 +24,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard','App\Http\Cont
 Route::get('/admin/category/create','App\Http\Controllers\CategoryController@create')->name('admin.category.create');
 Route::get('/admin/category','App\Http\Controllers\CategoryController@index')->name('admin.category.index');
 Route::post('/admin/category/store','App\Http\Controllers\CategoryController@store')->name('admin.category.store');
+Route::delete('/admin/category/delete/{id}','App\Http\Controllers\CategoryController@destroy')->name('admin.category.delete');
+Route::get('/admin/category/edit/{id}','App\Http\Controllers\CategoryController@edit')->name('admin.category.edit');
+Route::put('/admin/category/update/{id}','App\Http\Controllers\CategoryController@update')->name('admin.category.update');
 
 //
 //Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

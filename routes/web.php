@@ -28,6 +28,14 @@ Route::delete('/admin/category/delete/{id}','App\Http\Controllers\CategoryContro
 Route::get('/admin/category/edit/{id}','App\Http\Controllers\CategoryController@edit')->name('admin.category.edit');
 Route::put('/admin/category/update/{id}','App\Http\Controllers\CategoryController@update')->name('admin.category.update');
 
+//subcatgory route
+Route::get('/admin/subcategory/create','App\Http\Controllers\SubcategoryController@create')->name('admin.subcategory.create');
+Route::get('/admin/subcategory','App\Http\Controllers\SubcategoryController@index')->name('admin.subcategory.index');
+Route::post('/admin/subcategory/store','App\Http\Controllers\SubcategoryController@store')->name('admin.subcategory.store');
+Route::delete('/admin/subcategory/delete/{id}','App\Http\Controllers\SubcategoryController@destroy')->name('admin.subcategory.delete');
+Route::get('/admin/subcategory/edit/{id}','App\Http\Controllers\SubcategoryController@edit')->name('admin.subcategory.edit');
+Route::put('/admin/subcategory/update/{id}','App\Http\Controllers\SubcategoryController@update')->name('admin.subcategory.update');
+
 //
 //Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //    return Inertia\Inertia::render('Dashboard');

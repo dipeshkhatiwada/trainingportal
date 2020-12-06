@@ -16,7 +16,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v1</li>
+                        <li class="breadcrumb-item active">Subcyegoruy create</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -36,7 +36,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="{{route('admin.subcategory.store')}}" method="post">
+                        <form action="{{route('admin.subcategory.store')}}" enctype="multipart/form-data" method="post">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
@@ -70,6 +70,13 @@
                                     <input type="number" class="form-control" id="exampleInputRank" name="rank" placeholder="Enter rank">
                                     @if($errors->has('rank'))
                                         <label class="text text-danger">{{$errors->first('rank')}}</label>
+                                    @endif
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputImage">Image</label>
+                                    <input type="file" class="form-control" id="exampleInputImage" name="photo">
+                                    @if($errors->has('photo'))
+                                        <label class="text text-danger">{{$errors->first('photo')}}</label>
                                     @endif
                                 </div>
                                 <div class="form-group">

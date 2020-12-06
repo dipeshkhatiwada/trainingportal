@@ -14,7 +14,7 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0">
-                        Category List
+                        SubCategory List
                         <a href="{{route('admin.subcategory.create')}}" class="btn btn-primary">Add new</a>
 
                     </h1>
@@ -23,7 +23,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v1</li>
+                        <li class="breadcrumb-item active">Subcategory</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -49,6 +49,7 @@
                                     <th>Title</th>
                                     <th>Slug</th>
                                     <th>Rank</th>
+                                    <th>Image</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -62,6 +63,9 @@
                                     <td>{{$subcategory->title}}</td>
                                     <td>{{$subcategory->slug}}</td>
                                     <td>{{$subcategory->rank}}</td>
+                                    <td>
+                                        <img src="{{asset($subcategory->image)}}" alt="{{$subcategory->image}}" height="100">
+                                    </td>
                                     <td>
                                         @if($subcategory->status == 1)
                                             <label class="bg bg-success">Active</label>
@@ -113,6 +117,7 @@
                                     <th>Title</th>
                                     <th>Slug</th>
                                     <th>Rank</th>
+                                    <th>Image</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>

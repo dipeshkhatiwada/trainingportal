@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 
 class SubcategoryController extends Controller
 {
@@ -39,6 +41,14 @@ class SubcategoryController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->has('photo')){
+            $file = $request->file('photo');
+            $file_name = uniqid().'_'.$file->getClientOriginalName();
+            //            saving inside public folder
+            $file->move('images/subcategory/',$file_name);
+            //            adding to request to save in database
+            $request->request->add(['image'=>'images/subcategory/'.$file_name]);
+        }
         $subcat = Subcategory::create($request->all());
         if ($subcat){
             $request->session()->flash('success_message','Subcategory created');

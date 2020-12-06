@@ -48,6 +48,7 @@
                                     <th>Title</th>
                                     <th>Slug</th>
                                     <th>Rank</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -100,6 +101,7 @@
                                     <th>Title</th>
                                     <th>Slug</th>
                                     <th>Rank</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                                 </tfoot>

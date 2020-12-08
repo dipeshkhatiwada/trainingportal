@@ -58,13 +58,7 @@
                                         <label class="text text-danger">{{$errors->first('title')}}</label>
                                     @endif
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputSlug">Slug</label>
-                                    <input type="text" class="form-control" id="exampleInputSlug" name="slug" placeholder="Enter slug">
-                                    @if($errors->has('slug'))
-                                        <label class="text text-danger">{{$errors->first('slug')}}</label>
-                                    @endif
-                                </div>
+
                                 <div class="form-group">
                                     <label for="exampleInputRank">Rank</label>
                                     <input type="number" class="form-control" id="exampleInputRank" name="rank" placeholder="Enter rank">

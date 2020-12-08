@@ -38,15 +38,15 @@
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="exampleInputTitle">Title</label>
-                                    <input type="text" class="form-control" id="exampleInputTitle" name="title" placeholder="Enter title">
+                                    <label for="title">Title</label>
+                                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter title">
                                     @if($errors->has('title'))
                                         <label class="text text-danger">{{$errors->first('title')}}</label>
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputSlug">Slug</label>
-                                    <input type="text" class="form-control" id="exampleInputSlug" name="slug" placeholder="Enter slug">
+                                    <label for="slug">Slug</label>
+                                    <input type="text" class="form-control" id="slug" name="slug" placeholder="Enter slug">
                                     @if($errors->has('slug'))
                                         <label class="text text-danger">{{$errors->first('slug')}}</label>
                                     @endif
@@ -81,4 +81,16 @@
     </section>
 
 @endsection
-
+@section('js')
+    <script>
+        $("#title").keyup(function(){
+            var text = $(this).val();
+            // This is test
+            //this-is-test
+            text = text.toLowerCase();
+            var regExp = /\s+/g;
+            text = text.replace(regExp,'-');
+            $("#slug").val(text);
+        });
+    </script>
+@endsection

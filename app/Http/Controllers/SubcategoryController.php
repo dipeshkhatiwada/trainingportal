@@ -41,6 +41,9 @@ class SubcategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $request->request->add(['slug'=>Str::slug(\request()->input('title'))]);
+        dd($request->all());
+
         if ($request->has('photo')){
             $file = $request->file('photo');
             $file_name = uniqid().'_'.$file->getClientOriginalName();
@@ -122,5 +125,14 @@ class SubcategoryController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function get_by_category_id(Request $request){
+        $subcat = Subcategory::where('category_id',$request->input('category_id'))->pluck('title','id');
+        $response = "<option> Choose SubCategory</option>";
+        foreach ($subcat as $id=>$title){
+            $response .= "<option value='$id'>$title</option>";
+
+        }
+        return $response;
     }
 }

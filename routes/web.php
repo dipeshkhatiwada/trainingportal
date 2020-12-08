@@ -35,6 +35,15 @@ Route::post('/admin/subcategory/store','App\Http\Controllers\SubcategoryControll
 Route::delete('/admin/subcategory/delete/{id}','App\Http\Controllers\SubcategoryController@destroy')->name('admin.subcategory.delete');
 Route::get('/admin/subcategory/edit/{id}','App\Http\Controllers\SubcategoryController@edit')->name('admin.subcategory.edit');
 Route::put('/admin/subcategory/update/{id}','App\Http\Controllers\SubcategoryController@update')->name('admin.subcategory.update');
+//post route
+Route::get('/admin/post/create','App\Http\Controllers\PostController@create')->name('admin.post.create');
+Route::get('/admin/post','App\Http\Controllers\PostController@index')->name('admin.post.index');
+Route::post('/admin/post/store','App\Http\Controllers\PostController@store')->name('admin.post.store');
+Route::delete('/admin/post/delete/{id}','App\Http\Controllers\PostController@destroy')->name('admin.post.delete');
+Route::get('/admin/post/edit/{id}','App\Http\Controllers\PostController@edit')->name('admin.post.edit');
+Route::put('/admin/post/update/{id}','App\Http\Controllers\PostController@update')->name('admin.post.update');
+
+Route::post('/admin/post/get-by-category_id','App\Http\Controllers\SubcategoryController@get_by_category_id')->name('admin.subcategory.get_by_category_id');
 
 //
 //Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Subcategory;
+use Faker\Provider\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -49,9 +50,16 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request,$id)
     {
-        //
+        $data['post'] = Post::find($id);
+        if($data['post'] ){
+            return view('admin.post.show',compact('data'));
+
+        }else{
+            $request->session()->flash('error_message','Post not found');
+            return redirect()->route('admin.post.index');
+        }
     }
 
     /**
@@ -62,14 +70,15 @@ class PostController extends Controller
      */
     public function edit(Request $request,$id)
     {
-        $data['subcategory'] = Subcategory::find($id);
-        if($data['subcategory'] ){
+        $data['post'] = Post::find($id);
+        if($data['post'] ){
             $data['category'] = Category::pluck('title','id');
-            return view('admin.subcategory.edit',compact('data'));
+            $data['subcategory'] = Subcategory::where('category_id',$data['post']->category_id)->pluck('title','id');
+            return view('admin.post.edit',compact('data'));
 
         }else{
-            $request->session()->flash('error_message','Subcategory not found');
-            return redirect()->route('admin.subcategory.index');
+            $request->session()->flash('error_message','Post not found');
+            return redirect()->route('admin.post.index');
         }
 
 
@@ -84,14 +93,31 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $subcat = Subcategory::find($id);
-        if ($subcat->update($request->all())){
-            $request->session()->flash('success_message','Subcategory updated');
-            return redirect()->route('admin.subcategory.index');
+
+        $post = Post::find($id);
+
+        $request->request->add(['slug'=>Str::slug(\request()->input('title'))]);
+        if ($request->has('photo')){
+            $file = $request->file('photo');
+            $file_name = uniqid().'_'.$file->getClientOriginalName();
+            //            saving inside public folder
+            $file->move('images/post/',$file_name);
+            //            adding to request to save in database
+            $request->request->add(['image'=>'images/post/'.$file_name]);
+//            remove image from public folder
+            if(file_exists($post->image)){
+                unlink($post->image);
+            }
+
+        }
+
+        if ($post->update($request->all())){
+            $request->session()->flash('success_message','POst updated');
+            return redirect()->route('admin.post.index');
 
         }else{
-            $request->session()->flash('error_message','Subcategory updation failed');
-            return redirect()->route('admin.subcategory.index');
+            $request->session()->flash('error_message','POst updation failed');
+            return redirect()->route('admin.post.index');
         }
     }
 
@@ -101,8 +127,19 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-        //
+        $post = Post::find($id);
+        if(file_exists($post->image)){
+            unlink($post->image);
+        }
+        if ($post->delete()){
+            $request->session()->flash('success_message','POst deleted');
+            return redirect()->route('admin.post.index');
+        }else{
+            $request->session()->flash('error_message','POst updation failed');
+            return redirect()->route('admin.post.index');
+        }
+
     }
 }

@@ -42,6 +42,7 @@ Route::post('/admin/post/store','App\Http\Controllers\PostController@store')->na
 Route::delete('/admin/post/delete/{id}','App\Http\Controllers\PostController@destroy')->name('admin.post.delete');
 Route::get('/admin/post/edit/{id}','App\Http\Controllers\PostController@edit')->name('admin.post.edit');
 Route::put('/admin/post/update/{id}','App\Http\Controllers\PostController@update')->name('admin.post.update');
+Route::get('/admin/post/show/{id}','App\Http\Controllers\PostController@show')->name('admin.post.show');
 
 Route::post('/admin/post/get-by-category_id','App\Http\Controllers\SubcategoryController@get_by_category_id')->name('admin.subcategory.get_by_category_id');
 

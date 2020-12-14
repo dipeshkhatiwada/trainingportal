@@ -9,7 +9,7 @@
                 <div class="col-sm-6">
                     <h1 class="m-0">
                         POst Create
-                        <a href="{{route('admin.subcategory.index')}}" class="btn btn-primary">View All</a>
+                        <a href="{{route('admin.post.index')}}" class="btn btn-primary">View All</a>
 
                     </h1>
                 </div><!-- /.col -->
@@ -36,7 +36,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="{{route('admin.subcategory.store')}}" enctype="multipart/form-data" method="post">
+                        <form action="{{route('admin.post.store')}}" enctype="multipart/form-data" method="post">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">

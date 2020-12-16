@@ -2,6 +2,9 @@
 @section('seo')
     <title>POst Edit | Newsportal</title>
 @endsection
+@section('css')
+    <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
+@endsection
 @section('content')
     <div class="content-header">
         <div class="container-fluid">
@@ -89,12 +92,21 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputImage">Image</label><br/>
-                                    <input type="file"  id="exampleInputImage" name="photo" > <img src="{{asset($data['post']->image)}}" alt="{{asset($data['post']->image)}}" height="100px" width="100px">
+                                    <label for="photo">Image </label><br/>
+                                    <input type="file" id="photo" name="photo" data-parsley-trigger="change" >
+                                    <img src="{{asset($data['post']->image)}}" id="display_photo" style="height:80px;width:100px;">
                                     @if($errors->has('photo'))
                                         <label class="text text-danger">{{$errors->first('photo')}}</label>
                                     @endif
                                 </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="exampleInputImage">Image</label><br/>--}}
+{{--                                    <input type="file"  id="exampleInputImage" name="photo" >--}}
+{{--                                    <img src="{{asset($data['post']->image)}}" alt="{{asset($data['post']->image)}}" height="100px" width="100px">--}}
+{{--                                    @if($errors->has('photo'))--}}
+{{--                                        <label class="text text-danger">{{$errors->first('photo')}}</label>--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
                                 <div class="form-group">
                                     <label for="exampleInputRank">Description</label>
                                     <textarea name="description" id="description" class="form-control" >{{$data['post']->description}}</textarea>
@@ -139,6 +151,23 @@
 
 @endsection
 @section('js')
+    <script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#display_photo').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#photo").change(function () {
+            readURL(this);
+        });
+    </script>
+    <script>
+        CKEDITOR.replace( 'description' );
+    </script>
     <script>
         $(document).ready(function () {
             $('#category').change(function () {

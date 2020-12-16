@@ -4,7 +4,6 @@
 @endsection
 @section('css')
     <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
-    <!-- Select2 -->
     <link rel="stylesheet" href="{{asset('admin/plugins/select2/css/select2.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
 @endsection
@@ -82,8 +81,8 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputImage">Image</label>
-                                    <input type="file" class="form-control" id="exampleInputImage" name="photo">
+                                    <label for="photo">Image</label>
+                                    <input type="file" class="form-control" id="photo" name="photo">
                                     @if($errors->has('photo'))
                                         <label class="text text-danger">{{$errors->first('photo')}}</label>
                                     @endif
@@ -125,6 +124,7 @@
 
 @endsection
 @section('js')
+
     <!-- Select2 -->
     <script src="{{asset('admin/plugins/select2/js/select2.full.min.js')}}"></script>
     <script>

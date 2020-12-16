@@ -66,6 +66,15 @@
                                     <td>{{$data['post']->title}}</td>
                                 </tr>
                                 <tr>
+                                    <td>3.</td>
+                                    <td>Tags</td>
+                                    <td>
+                                        @foreach($data['post']->tags()->pluck('title') as $tag)
+                                            {{$tag}} ,
+                                        @endforeach
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td>
                                         10.
                                     </td>

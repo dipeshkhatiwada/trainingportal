@@ -66,6 +66,15 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
+                                    <label for="tag">Tags</label><br/>
+                                        @foreach($data['tag'] as $id=>$title)
+                                            <input type="checkbox" name="tag_id[]" value="{{$id}}"> {{$title}}
+                                        @endforeach
+                                    @if($errors->has('tag'))
+                                        <label class="text text-danger">{{$errors->first('tag')}}</label>
+                                    @endif
+                                </div>
+                                <div class="form-group">
                                     <label for="exampleInputTitle">Title</label>
                                     <input type="text" class="form-control" id="exampleInputTitle" name="title" placeholder="Enter title">
                                     @if($errors->has('title'))

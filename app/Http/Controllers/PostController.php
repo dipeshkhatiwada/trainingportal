@@ -21,6 +21,7 @@ class PostController extends Controller
 
     public function create(Request $request){
         $data['category'] = Category::pluck('title','id');
+        $data['tag'] = Tag::pluck('title','id');
         return view('admin.post.create',compact('data'));
     }
     public function store(Request $request)
@@ -35,7 +36,7 @@ class PostController extends Controller
             $request->request->add(['image'=>'images/post/'.$file_name]);
         }
         $post = Post::create($request->all());
-
+        $post->tags()->sync($request->input('tag_id'));
         if ($post){
             $request->session()->flash('success_message','POst created');
             return redirect()->route('admin.post.index');
@@ -76,7 +77,8 @@ class PostController extends Controller
         if($data['post'] ){
             $data['category'] = Category::pluck('title','id');
             $data['subcategory'] = Subcategory::where('category_id',$data['post']->category_id)->pluck('title','id');
-
+            $data['tag'] = Tag::pluck('title','id');
+            $data['checked_tag'] = $data['post']->tags()->pluck('tag_id')->toArray();
             return view('admin.post.edit',compact('data'));
 
         }else{
@@ -96,8 +98,15 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $post = Post::find($id);
+
+//        $request->request->add(['tags'=>json_encode($request->input('tag_id'))]);
+//        $post->update($request->all());
+//        dd($request);
+
+//        $post->tags()->detach();
+        $post->tags()->sync($request->input('tag_id'));
+//        dd($request->all());
 
         $request->request->add(['slug'=>Str::slug(\request()->input('title'))]);
         if ($request->has('photo')){

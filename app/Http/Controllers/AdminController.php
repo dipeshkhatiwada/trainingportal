@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Post;
+use App\Models\Subcategory;
+use App\Models\Tag;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Pipeline;
@@ -59,7 +63,12 @@ class AdminController extends Controller
     }
 
     public function dashboard (){
-        return view('admin.dashboard');
+        $data = [];
+        $data['cat_count'] = Category::count();
+        $data['sub_cat_count'] = Subcategory::count();
+        $data['tag_count'] = Tag::count();
+        $data['post_count'] = Post::where('status',1)->count();
+        return view('admin.dashboard',compact('data'));
 
     }
 }

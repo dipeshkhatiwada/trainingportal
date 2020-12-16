@@ -78,6 +78,19 @@
                                     @endif
                                 </div>
                                 <div class="form-group">
+                                    <label for="tag">Tags</label><br/>
+                                    @foreach($data['tag'] as $id=>$title)
+                                        @if(in_array($id,$data['checked_tag']))
+                                            <input type="checkbox" name="tag_id[]" value="{{$id}}" checked> {{$title}}
+                                        @else
+                                            <input type="checkbox" name="tag_id[]" value="{{$id}}"> {{$title}}
+                                        @endif
+                                    @endforeach
+                                    @if($errors->has('tag'))
+                                        <label class="text text-danger">{{$errors->first('tag')}}</label>
+                                    @endif
+                                </div>
+                                <div class="form-group">
                                     <label for="exampleInputTitle">Title</label>
                                     <input type="text" class="form-control" id="exampleInputTitle" name="title" value="{{$data['post']->title}}" placeholder="Enter title">
                                     @if($errors->has('title'))
@@ -99,14 +112,6 @@
                                         <label class="text text-danger">{{$errors->first('photo')}}</label>
                                     @endif
                                 </div>
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="exampleInputImage">Image</label><br/>--}}
-{{--                                    <input type="file"  id="exampleInputImage" name="photo" >--}}
-{{--                                    <img src="{{asset($data['post']->image)}}" alt="{{asset($data['post']->image)}}" height="100px" width="100px">--}}
-{{--                                    @if($errors->has('photo'))--}}
-{{--                                        <label class="text text-danger">{{$errors->first('photo')}}</label>--}}
-{{--                                    @endif--}}
-{{--                                </div>--}}
                                 <div class="form-group">
                                     <label for="exampleInputRank">Description</label>
                                     <textarea name="description" id="description" class="form-control" >{{$data['post']->description}}</textarea>

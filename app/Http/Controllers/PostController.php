@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Subcategory;
+use App\Models\Tag;
 use Faker\Provider\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -34,6 +35,7 @@ class PostController extends Controller
             $request->request->add(['image'=>'images/post/'.$file_name]);
         }
         $post = Post::create($request->all());
+
         if ($post){
             $request->session()->flash('success_message','POst created');
             return redirect()->route('admin.post.index');
@@ -74,6 +76,7 @@ class PostController extends Controller
         if($data['post'] ){
             $data['category'] = Category::pluck('title','id');
             $data['subcategory'] = Subcategory::where('category_id',$data['post']->category_id)->pluck('title','id');
+
             return view('admin.post.edit',compact('data'));
 
         }else{
@@ -110,6 +113,7 @@ class PostController extends Controller
             }
 
         }
+
 
         if ($post->update($request->all())){
             $request->session()->flash('success_message','POst updated');

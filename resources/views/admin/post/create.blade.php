@@ -2,6 +2,12 @@
 @section('seo')
     <title>POst Create | Newsportal</title>
 @endsection
+@section('css')
+    <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{asset('admin/plugins/select2/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
+@endsection
 @section('content')
     <div class="content-header">
         <div class="container-fluid">
@@ -41,7 +47,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="exampleInputTitle">Category</label>
-                                    <select name="category_id" class="form-control"  id="category">
+                                    <select name="category_id" class="form-control select2"  id="category">
                                         <option> Select Category</option>
                                         @foreach($data['category'] as $id=>$title)
                                         <option value="{{$id}}">{{$title}}</option>
@@ -119,6 +125,11 @@
 
 @endsection
 @section('js')
+    <!-- Select2 -->
+    <script src="{{asset('admin/plugins/select2/js/select2.full.min.js')}}"></script>
+    <script>
+        CKEDITOR.replace( 'description' );
+    </script>
     <script>
         $(document).ready(function () {
             $('#category').change(function () {
@@ -141,6 +152,14 @@
 
             });
 
+        });
+        $(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2();
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            });
         });
     </script>
 @endsection

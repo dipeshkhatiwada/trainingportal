@@ -106,7 +106,13 @@ class CategoryController extends Controller
     public function destroy(Request $request,$id)
     {
         $cat = Category::find($id);
-        if ($cat->delete()){
+        if ($cat){
+            try {
+                $cat->delete();
+            }catch (\Exception $e){
+                $request->session()->flash('error_message','Category already have subcategory  ! ');
+                return redirect()->route('admin.category.index');
+            }
             $request->session()->flash('success_message','Category deleted Successfully  ! ');
             return redirect()->route('admin.category.index');
 

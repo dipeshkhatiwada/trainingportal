@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Pipeline;
 use Laravel\Fortify\Actions\AttemptToAuthenticate;
@@ -47,6 +48,16 @@ class AdminController extends Controller
             PrepareAuthenticatedSession::class,
         ]));
     }
+    public function logout(Request $request,StatefulGuard $guard){
+        $guard->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('admin.login');
+    }
+
     public function dashboard (){
         return view('admin.dashboard');
 

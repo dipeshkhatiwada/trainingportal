@@ -13,6 +13,11 @@ class Category extends Model
     protected $fillable = ['title','slug','rank'];
 
     public function subcategories(){
+        return $this->hasMany(Subcategory::class);
+
+    }
+    public function posts(){
+        return $this->hasMany(Post::class);
 
     }
 

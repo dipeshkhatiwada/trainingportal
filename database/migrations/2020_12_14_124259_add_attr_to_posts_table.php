@@ -19,6 +19,7 @@ class AddAttrToPostsTable extends Migration
             $table->unsignedBigInteger('subcategory_id');
             $table->foreign('subcategory_id')->references('id')->on('subcategories');
             $table->string('image');
+            $table->integer('view');
             $table->boolean('status')->default(0);
 
         });

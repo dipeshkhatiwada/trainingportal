@@ -12,14 +12,18 @@
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto">
                         <a href="index.html" class="nav-item nav-link active">Home</a>
+                        @foreach($data['menu'] as $menu)
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dropdown</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{$menu->title}}</a>
                             <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Sub Item 1</a>
-                                <a href="#" class="dropdown-item">Sub Item 2</a>
+                                @foreach($menu->subcategories()->get() as $sub_menu)
+
+                                <a href="#" class="dropdown-item">{{$sub_menu->title}}</a>
+{{--                                    @php($sub_menu->posts()->get()))--}}
+                                @endforeach
                             </div>
                         </div>
-                        <a href="single-page.html" class="nav-item nav-link">Single Page</a>
+                        @endforeach
                         <a href="contact.html" class="nav-item nav-link">Contact Us</a>
                     </div>
                     <div class="social ml-auto">
@@ -61,61 +65,33 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h2>Sports</h2>
+                    <h2>{{$data['category'][0]->title}}</h2>
                     <div class="row cn-slider">
+                        @foreach($data['first_news'] as $first_news)
                         <div class="col-md-6">
                             <div class="cn-img">
-                                <img src="img/news-350x223-1.jpg" />
+                                <img src="{{asset($first_news->image)}}" height="200"  />
                                 <div class="cn-title">
-                                    <a href="">Lorem ipsum dolor sit</a>
+                                    <a href="">{{$first_news->title}}</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="img/news-350x223-2.jpg" />
-                                <div class="cn-title">
-                                    <a href="">Lorem ipsum dolor sit</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="img/news-350x223-3.jpg" />
-                                <div class="cn-title">
-                                    <a href="">Lorem ipsum dolor sit</a>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <h2>Technology</h2>
+                    <h2>{{$data['category'][1]->title}}</h2>
                     <div class="row cn-slider">
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="img/news-350x223-4.jpg" />
-                                <div class="cn-title">
-                                    <a href="">Lorem ipsum dolor sit</a>
+                        @foreach($data['second_news'] as $second_news)
+                            <div class="col-md-6">
+                                <div class="cn-img">
+                                    <img src="{{asset($second_news->image)}}" height="200"  />
+                                    <div class="cn-title">
+                                        <a href="">{{$second_news->title}}</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="img/news-350x223-5.jpg" />
-                                <div class="cn-title">
-                                    <a href="">Lorem ipsum dolor sit</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="cn-img">
-                                <img src="img/news-350x223-1.jpg" />
-                                <div class="cn-title">
-                                    <a href="">Lorem ipsum dolor sit</a>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -138,30 +114,16 @@
 
                     <div class="tab-content">
                         <div class="container tab-pane active">
+                            @foreach($data['latest_news'] as $latest_news)
                             <div class="tn-news">
                                 <div class="tn-img">
-                                    <img src="img/news-350x223-1.jpg" />
+                                    <img src="{{asset($latest_news->image)}}" />
                                 </div>
                                 <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
+                                    <a href="">{{$latest_news->title}}</a>
                                 </div>
                             </div>
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="img/news-350x223-2.jpg" />
-                                </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="img/news-350x223-3.jpg" />
-                                </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
 
                     </div>
@@ -177,30 +139,16 @@
 
                     <div class="tab-content">
                         <div class="container tab-pane active">
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="img/news-350x223-5.jpg" />
+                            @foreach($data['most_view'] as $most_view)
+                                <div class="tn-news">
+                                    <div class="tn-img">
+                                        <img src="{{asset($most_view->image)}}" />
+                                    </div>
+                                    <div class="tn-title">
+                                        <a href="">{{$most_view->title}}</a>
+                                    </div>
                                 </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="img/news-350x223-4.jpg" />
-                                </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
-                            <div class="tn-news">
-                                <div class="tn-img">
-                                    <img src="img/news-350x223-3.jpg" />
-                                </div>
-                                <div class="tn-title">
-                                    <a href="">Lorem ipsum dolor sit amet</a>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

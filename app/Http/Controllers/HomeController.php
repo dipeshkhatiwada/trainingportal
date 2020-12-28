@@ -41,10 +41,58 @@ class HomeController extends Controller
         return view('home.index',compact('data'));
     }
 
-    public function cat(){
+    public function detail($slug){
+        $data=[];
         $data['menu'] = Category::select('title','slug','id')
             ->orderBy('rank','ASC')
             ->limit(5)
             ->get();
+        $data['category'] = Category::select('title','slug','id')
+            ->orderBy('rank','ASC')
+            ->limit(5)
+            ->get();
+        $data['news'] = Post::where('slug',$slug)
+//            ->select('title','slug','id','description','image')
+            ->first();
+        $data['tags'] = $data['news']->tags()->get();
+        $data['related_news'] = Post::where('category_id',$data['news']->category_id)
+                        ->where('id','!=',$data['news']->id)
+                        ->limit(5)
+                        ->get();
+//        dd($data);
+
+        return view('home.detail',compact('data'));
+    }
+    public function category($slug){
+        $data=[];
+        $data['menu'] = Category::select('title','slug','id')
+            ->orderBy('rank','ASC')
+            ->limit(5)
+            ->get();
+
+        $data['category'] = Category::where('slug',$slug)
+//            ->select('title','slug','id','description','image')
+            ->first();
+        $data['news'] = $data['category']->posts()->paginate(3);
+
+//        dd($data);
+
+        return view('home.category',compact('data'));
+    }
+    public function subcategory($slug){
+        $data=[];
+        $data['menu'] = Category::select('title','slug','id')
+            ->orderBy('rank','ASC')
+            ->limit(5)
+            ->get();
+
+        $data['category'] = Category::where('slug',$slug)
+//            ->select('title','slug','id','description','image')
+            ->first();
+        $data['news'] = $data['category']->posts()->paginate(3);
+
+//        dd($data);
+
+        return view('home.category',compact('data'));
     }
 }

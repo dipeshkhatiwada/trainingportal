@@ -11,17 +11,21 @@
 
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="{{route('home.index')}}" class="nav-item nav-link active">Home</a>
                         @foreach($data['menu'] as $menu)
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{$menu->title}}</a>
+                            @if($menu->subcategories()->count() > 0)
+                            <a href="{{route('home.category',$menu->slug)}}" class="nav-link dropdown-toggle" data-toggle="dropdown">{{$menu->title}}</a>
                             <div class="dropdown-menu">
                                 @foreach($menu->subcategories()->get() as $sub_menu)
 
-                                <a href="#" class="dropdown-item">{{$sub_menu->title}}</a>
+                                <a href="{{route('home.subcategory',$sub_menu->slug)}}" class="dropdown-item">{{$sub_menu->title}}</a>
 {{--                                    @php($sub_menu->posts()->get()))--}}
                                 @endforeach
                             </div>
+                            @else
+                                <a href="{{route('home.category',$menu->slug)}}" class="nav-item nav-link">{{$menu->title}}</a>
+                            @endif
                         </div>
                         @endforeach
                         <a href="contact.html" class="nav-item nav-link">Contact Us</a>
@@ -49,7 +53,7 @@
                             <div class="tn-img">
                                 <img src="{{asset($top_news->image)}}" height="400px"/>
                                 <div class="tn-title">
-                                    <a href="">{{$top_news->title}}</a>
+                                    <a href="{{route('news.detail',$top_news->slug)}}">{{$top_news->title}}</a>
                                 </div>
                             </div>
                         @endforeach
@@ -72,7 +76,7 @@
                             <div class="cn-img">
                                 <img src="{{asset($first_news->image)}}" height="200"  />
                                 <div class="cn-title">
-                                    <a href="">{{$first_news->title}}</a>
+                                    <a href="{{route('news.detail',$first_news->slug)}}">{{$first_news->title}}</a>
                                 </div>
                             </div>
                         </div>

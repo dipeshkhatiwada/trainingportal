@@ -20,12 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d494a5f7-fef1-4448-9829-b739b4d13d7b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/home/category.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/home/detail.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Category.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_14_124259_add_attr_to_posts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_14_124259_add_attr_to_posts_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/home/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +173,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Models" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/home" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -184,11 +186,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/home" />
       <recent name="$PROJECT_DIR$/app/Models" />
       <recent name="$PROJECT_DIR$/resources/views/admin/post" />
       <recent name="$PROJECT_DIR$/resources/views/admin/subcategory" />
       <recent name="$PROJECT_DIR$/resources/views/admin/category" />
-      <recent name="C:\xampp\htdocs\trainingportal\public\admin" />
     </key>
   </component>
   <component name="RunManager">
@@ -225,7 +227,9 @@
       <workItem from="1608123035443" duration="2196000" />
       <workItem from="1608555448765" duration="3160000" />
       <workItem from="1608732843888" duration="1528000" />
-      <workItem from="1608904949006" duration="2757000" />
+      <workItem from="1608904949006" duration="3389000" />
+      <workItem from="1608990913511" duration="823000" />
+      <workItem from="1609163253781" duration="5214000" />
     </task>
     <servers />
   </component>

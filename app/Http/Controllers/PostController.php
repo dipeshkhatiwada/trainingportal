@@ -35,6 +35,7 @@ class PostController extends Controller
             //            adding to request to save in database
             $request->request->add(['image'=>'images/post/'.$file_name]);
         }
+//        dd($request);
         $post = Post::create($request->all());
         $post->tags()->sync($request->input('tag_id'));
         if ($post){

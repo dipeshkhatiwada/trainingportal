@@ -1,43 +1,6 @@
 @extends('home.layouts.app')
 @section('main')
-    <!-- Nav Bar Start -->
-    <div class="nav-bar">
-        <div class="container">
-            <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-                <a href="#" class="navbar-brand">MENU</a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav mr-auto">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        @foreach($data['menu'] as $menu)
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{$menu->title}}</a>
-                            <div class="dropdown-menu">
-                                @foreach($menu->subcategories()->get() as $sub_menu)
-
-                                <a href="#" class="dropdown-item">{{$sub_menu->title}}</a>
-{{--                                    @php($sub_menu->posts()->get()))--}}
-                                @endforeach
-                            </div>
-                        </div>
-                        @endforeach
-                        <a href="contact.html" class="nav-item nav-link">Contact Us</a>
-                    </div>
-                    <div class="social ml-auto">
-                        <a href=""><i class="fab fa-twitter"></i></a>
-                        <a href=""><i class="fab fa-facebook-f"></i></a>
-                        <a href=""><i class="fab fa-linkedin-in"></i></a>
-                        <a href=""><i class="fab fa-instagram"></i></a>
-                        <a href=""><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
-    <!-- Nav Bar End -->
     <!-- Breadcrumb Start -->
     <div class="breadcrumb-wrap">
         <div class="container">

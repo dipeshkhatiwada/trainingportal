@@ -3,7 +3,10 @@
 @include('home.includes.head')
 
 <body>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0" nonce="uQd7xmX7"></script>
 @include('home.includes.top')
+@include('home.includes.menu')
 @yield('main')
 @include('home.includes.footer')
 <!-- JavaScript Libraries -->

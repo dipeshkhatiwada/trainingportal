@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -32,10 +33,10 @@ class HomeController extends Controller
                             ->limit(3)
                             ->get();
 
-        $data['menu'] = Category::select('title','slug','id')
-            ->orderBy('rank','ASC')
-            ->limit(5)
-            ->get();
+//        $data['menu'] = Category::select('title','slug','id')
+//            ->orderBy('rank','ASC')
+//            ->limit(5)
+//            ->get();
 
 //        dd($data);
         return view('home.index',compact('data'));
@@ -43,10 +44,10 @@ class HomeController extends Controller
 
     public function detail($slug){
         $data=[];
-        $data['menu'] = Category::select('title','slug','id')
-            ->orderBy('rank','ASC')
-            ->limit(5)
-            ->get();
+//        $data['menu'] = Category::select('title','slug','id')
+//            ->orderBy('rank','ASC')
+//            ->limit(5)
+//            ->get();
         $data['category'] = Category::select('title','slug','id')
             ->orderBy('rank','ASC')
             ->limit(5)
@@ -60,15 +61,15 @@ class HomeController extends Controller
                         ->limit(5)
                         ->get();
 //        dd($data);
-
+//        increasing view of the post
         return view('home.detail',compact('data'));
     }
     public function category($slug){
         $data=[];
-        $data['menu'] = Category::select('title','slug','id')
-            ->orderBy('rank','ASC')
-            ->limit(5)
-            ->get();
+//        $data['menu'] = Category::select('title','slug','id')
+//            ->orderBy('rank','ASC')
+//            ->limit(5)
+//            ->get();
 
         $data['category'] = Category::where('slug',$slug)
 //            ->select('title','slug','id','description','image')
@@ -79,14 +80,11 @@ class HomeController extends Controller
 
         return view('home.category',compact('data'));
     }
-    public function subcategory($slug){
+    public function subcategory($cat_slug,$sub_slug){
         $data=[];
-        $data['menu'] = Category::select('title','slug','id')
-            ->orderBy('rank','ASC')
-            ->limit(5)
-            ->get();
 
-        $data['category'] = Category::where('slug',$slug)
+
+        $data['category'] = Category::where('slug',$cat_slug)
 //            ->select('title','slug','id','description','image')
             ->first();
         $data['news'] = $data['category']->posts()->paginate(3);
@@ -95,4 +93,19 @@ class HomeController extends Controller
 
         return view('home.category',compact('data'));
     }
+    public function contact(){
+        $data=[];
+        return view('home.contact',compact('data'));
+    }
+    public function contactStore(Request $request){
+        $contact = Contact::create($request->all());
+        if ($contact){
+            $request->session()->flash('success_message','Message  created');
+            return redirect()->route('home.contact');
+        }else{
+            $request->session()->flash('error_message','Message creation failed');
+            return redirect()->route('home.contact');
+        }
+    }
+
 }

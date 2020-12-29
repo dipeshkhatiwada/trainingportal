@@ -25,6 +25,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        View::composer(['home.includes.menu',],function ($view){
+            $view
+                ->with(
+                    'menus',Category::select('title','slug','id')
+                    ->orderBy('rank','ASC')
+                    ->limit(5)
+                    ->get()
+                );
+        });
     }
 }

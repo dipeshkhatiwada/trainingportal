@@ -16,8 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','App\Http\Controllers\HomeController@index')->name('home.index');
 Route::get('/category/{slug}','App\Http\Controllers\HomeController@category')->name('home.category');
-Route::get('/subcategory/{slug}','App\Http\Controllers\HomeController@subcategory')->name('home.subcategory');
+Route::get('/subcategory/{cat_slug}/{sub_slug}','App\Http\Controllers\HomeController@subcategory')->name('home.subcategory');
 Route::get('/news/{slug}','App\Http\Controllers\HomeController@detail')->name('news.detail');
+Route::get('/contact-us','App\Http\Controllers\HomeController@contact')->name('home.contact');
+Route::post('/contact-us','App\Http\Controllers\HomeController@contactStore')->name('home.contact.store');
 
 
 Route::get('/login','App\Http\Controllers\AdminController@login')->name('admin.login');

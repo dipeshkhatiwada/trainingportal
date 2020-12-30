@@ -104,6 +104,16 @@
                     </ul>
                 </li>
                 <li class="nav-item">
+                    <a href="{{route('admin.contact.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <p>
+                            Contact Message
+
+                        </p>
+                    </a>
+
+                </li>
+                <li class="nav-item">
                     <a href="{{route('admin.logout')}}" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>

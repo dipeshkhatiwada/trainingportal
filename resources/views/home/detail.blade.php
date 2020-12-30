@@ -24,8 +24,12 @@
                         </div>
                         <div class="sn-content">
                             <h1 class="sn-title">{{$data['news']->title}}</h1>
-                            <h4>Date: {{$data['news']->created_at}}</h4>
-                            {!! $data['news']->description !!}
+                            <h4>Date: {{date('M d ,Y',strtotime($data['news']->created_at))}}</h4>
+                            <h4>Date: {{ \Carbon\Carbon::parse($data['news']->created_at)->diffForHumans()}}</h4>
+{{--avoid <P> tag and other tag we use {!!  !!} sYNTAX--}}
+                            {!! Str::limit( $data['news']->description, 380)!!} <a href="">Read more</a>
+
+{{--                            {!! $data['news']->description !!}--}}
                         </div>
                     </div>
                     <div class="fb-comments" data-href="{{\Illuminate\Support\Facades\Request::url()}}" data-width="" data-numposts="5"></div>

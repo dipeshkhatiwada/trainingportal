@@ -55,7 +55,11 @@ class HomeController extends Controller
         $data['news'] = Post::where('slug',$slug)
 //            ->select('title','slug','id','description','image')
             ->first();
+//        increasing view count for most viewed post
+
+        $data['news']->update(['view'=>$data['news']->view+1]);
         $data['tags'] = $data['news']->tags()->get();
+
         $data['related_news'] = Post::where('category_id',$data['news']->category_id)
                         ->where('id','!=',$data['news']->id)
                         ->limit(5)

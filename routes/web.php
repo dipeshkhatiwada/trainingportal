@@ -59,6 +59,13 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('/admin/')->namespace('A
 
     Route::post('post/get-by-category_id','SubcategoryController@get_by_category_id')->name('subcategory.get_by_category_id');
 
+    Route::post('post/ckeditor','PostController@upload')->name('ckeditor.upload');
+
+
+    Route::get('contact',          'ContactController@index')->name('contact.index');
+    Route::get('contact/show/{id}','ContactController@show')->name('contact.show');
+    Route::delete('contact/delete/{id}','ContactController@destroy')->name('contact.delete');
+
 });
 
 

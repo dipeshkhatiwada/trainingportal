@@ -133,11 +133,14 @@
 
 @endsection
 @section('js')
-
+    <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
     <!-- Select2 -->
     <script src="{{asset('admin/plugins/select2/js/select2.full.min.js')}}"></script>
     <script>
-        CKEDITOR.replace( 'description' );
+        CKEDITOR.replace( 'description',{
+            filebrowserUploadUrl: "{{route('admin.ckeditor.upload', ['_token' => csrf_token() ])}}",
+            filebrowserUploadMethod: 'form'
+        } );
     </script>
     <script>
         $(document).ready(function () {

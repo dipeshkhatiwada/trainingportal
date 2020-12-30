@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('seo')
-    <title>Post List | Newsportal</title>
+    <title>Contact Message | Newsportal</title>
 @endsection
 @section('css')
     <link rel="stylesheet" href="{{asset('admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
@@ -14,8 +14,7 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0">
-                        SubPost List
-                        <a href="{{route('admin.subcategory.create')}}" class="btn btn-primary">Add new</a>
+                        Category Message
 
                     </h1>
 
@@ -23,7 +22,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Subcategory</li>
+                        <li class="breadcrumb-item active">Dashboard v1</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -37,49 +36,40 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Post List</h3>
+                            <h3 class="card-title">Category List</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-hover">
+                            <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <th>S.N</th>
-                                    <th>Category</th>
-                                    <th>Sub Category</th>
-                                    <th>Title</th>
-                                    <th>Slug</th>
-                                    <th>Rank</th>
-                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>email</th>
+                                    <th>sub</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @php($i=1)
-                                @foreach($data['posts'] as $post)
+                                @foreach($data['contact'] as $contact)
                                 <tr>
                                     <td>{{$i++}}</td>
-                                    <td>{{$post->category->title}}</td>
-                                    <td>@if($post->subcategory_id){{$post->subcategory->title}} @else NOt FOund @endif</td>
-                                    <td>{{$post->title}}</td>
-                                    <td>{{$post->slug}}</td>
-                                    <td>{{$post->rank}}</td>
+                                    <td>{{$contact->name}}</td>
+                                    <td>{{$contact->email}}</td>
+                                    <td>{{$contact->subject}}</td>
                                     <td>
-                                        <img src="{{asset($post->image)}}" alt="{{$post->image}}" height="100">
-                                    </td>
-                                    <td>
-                                        @if($post->status == 1)
-                                            <label class="bg bg-success">Active</label>
+                                        @if($contact->status == 1)
+                                            <label class="bg bg-success">Seen</label>
 
                                         @else
-                                            <label class="bg bg-danger">Deactive</label>
+                                            <label class="bg bg-danger">Unseen</label>
                                         @endif
 
                                     </td>
                                     <td>
-                                        <a href="{{route('admin.post.show',$post->id)}}" class="btn btn-success" ><i class="fa fa-eye"></i></a>
-                                        <a href="{{route('admin.post.edit',$post->id)}}" class="btn btn-primary" ><i class="fa fa-edit"></i></a>
+                                        <a href="{{route('admin.contact.show',$contact->id)}}" class="btn btn-success" ><i class="fa fa-eye"></i></a>
                                         <a href="" class="btn btn-danger" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash"></i></a>
 
                                         <div class="modal fade" id="myModal" role="dialog">
@@ -94,7 +84,7 @@
                                                             <h3>Are You Sure want to delete this record?</h3>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <form action="{{route('admin.post.delete',$post->id)}}" method="post">
+                                                            <form action="{{route('admin.category.delete',$contact->id)}}" method="post">
                                                                 @csrf
                                                                 {{method_field('DELETE')}}
                                                                 <button type="submit" class="btn btn-danger" name="btnCreate"> <i class="fa fa-trash"></i> Delete ! </button>
@@ -116,12 +106,9 @@
                                 <tfoot>
                                 <tr>
                                     <th>S.N</th>
-                                    <th>Category</th>
-                                    <th>Sub Category</th>
-                                    <th>Title</th>
-                                    <th>Slug</th>
-                                    <th>Rank</th>
-                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>email</th>
+                                    <th>sub</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -155,21 +142,4 @@
     <script src="{{asset('admin/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
     <script src="{{asset('admin/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
     <script src="{{asset('admin/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
-    <script>
-        $(function () {
-            $("#example1").DataTable({
-                "responsive": true, "lengthChange": false, "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
-        });
-    </script>
 @endsection

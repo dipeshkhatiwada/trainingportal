@@ -112,4 +112,14 @@ class HomeController extends Controller
         }
     }
 
+    public function search(Request $request){
+        $search = $request->value;
+//        dd($search);
+        $data=[];
+        $data['search_news'] = Post::where('title','LIKE','%'.$search.'%')->paginate(3);
+//        dd($data);
+        return view('home.search',compact('data'));
+    }
+
+
 }

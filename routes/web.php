@@ -21,6 +21,9 @@ Route::get('/news/{slug}','App\Http\Controllers\HomeController@detail')->name('n
 Route::get('/contact-us','App\Http\Controllers\HomeController@contact')->name('home.contact');
 Route::post('/contact-us','App\Http\Controllers\HomeController@contactStore')->name('home.contact.store');
 
+//search url
+Route::get('/search','App\Http\Controllers\HomeController@search')->name('home.search');
+
 
 Route::get('/login','App\Http\Controllers\AdminController@login')->name('admin.login');
 Route::post('/login','App\Http\Controllers\AdminController@store')->name('login');

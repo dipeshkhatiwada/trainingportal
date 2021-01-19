@@ -41,8 +41,10 @@
             </div>
             <div class="col-lg-3 col-md-4">
                 <div class="b-search">
-                    <input type="text" placeholder="Search">
-                    <button><i class="fa fa-search"></i></button>
+                    <form action="{{route('home.search')}}" method="get">
+                        <input type="text" name="value" placeholder="Search">
+                        <button><i class="fa fa-search"></i></button>
+                    </form>
                 </div>
             </div>
         </div>

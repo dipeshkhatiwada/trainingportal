@@ -6,12 +6,15 @@
                 <div class="footer-widget">
                     <h3 class="title">Get in Touch</h3>
                     <div class="contact-info">
+                        <a href="index.html">
+                            <img src="{{asset($logo)}}" alt="Logo">
+                        </a>
                         <p><i class="fa fa-map-marker"></i>123 News Street, NY, USA</p>
                         <p><i class="fa fa-envelope"></i>info@example.com</p>
                         <p><i class="fa fa-phone"></i>+123-456-7890</p>
                         <div class="social">
                             <a href=""><i class="fab fa-twitter"></i></a>
-                            <a href=""><i class="fab fa-facebook-f"></i></a>
+                            <a href="{{$facebook_url}}" target="_blank"><i class="fab fa-facebook-f"></i></a>
                             <a href=""><i class="fab fa-linkedin-in"></i></a>
                             <a href=""><i class="fab fa-instagram"></i></a>
                             <a href=""><i class="fab fa-youtube"></i></a>
@@ -51,7 +54,7 @@
                     <h3 class="title">Newsletter</h3>
                     <div class="newsletter">
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed porta dui. Class aptent taciti sociosqu
+                            {{$message}}
                         </p>
                         <form>
                             <input class="form-control" type="email" placeholder="Your email here">

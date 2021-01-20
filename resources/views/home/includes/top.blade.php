@@ -28,15 +28,17 @@
             <div class="col-lg-3 col-md-4">
                 <div class="b-logo">
                     <a href="index.html">
-                        <img src="img/logo.png" alt="Logo">
+                        <img src="{{asset($logo)}}" alt="Logo">
                     </a>
                 </div>
             </div>
             <div class="col-lg-6 col-md-4">
-                <div class="b-ads">
-                    <a href="https://htmlcodex.com">
-                        <img src="img/ads-1.jpg" alt="Ads">
-                    </a>
+                <div class="social ml-auto">
+                    <a href=""><i class="fab fa-twitter"></i></a>
+                    <a href="{{$facebook_url}}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href=""><i class="fab fa-linkedin-in"></i></a>
+                    <a href=""><i class="fab fa-instagram"></i></a>
+                    <a href=""><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-4">

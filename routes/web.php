@@ -69,6 +69,10 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('/admin/')->namespace('A
     Route::get('contact/show/{id}','ContactController@show')->name('contact.show');
     Route::delete('contact/delete/{id}','ContactController@destroy')->name('contact.delete');
 
+    Route::get('setting',          'SettingController@index')->name('setting');
+    Route::post('setting/store','SettingController@store')->name('setting.store');
+    Route::post('setting/update/{id}','SettingController@update')->name('setting.update');
+
 });
 
 

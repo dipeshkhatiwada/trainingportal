@@ -114,6 +114,16 @@
 
                 </li>
                 <li class="nav-item">
+                    <a href="{{route('admin.setting')}}" class="nav-link">
+                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <p>
+                            SEtting
+
+                        </p>
+                    </a>
+
+                </li>
+                <li class="nav-item">
                     <a href="{{route('admin.logout')}}" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>

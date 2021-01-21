@@ -28,7 +28,7 @@
                             </div>
                         </div>
                         @endforeach
-                            {{$data['news']}}
+                            {{$data['news']->links()}}
 
                     </div>
                 </div>

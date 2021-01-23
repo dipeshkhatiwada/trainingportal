@@ -33,6 +33,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard','App\Http\Cont
 
 Route::middleware(['auth:sanctum', 'verified'])->prefix('/admin/')->namespace('App\\Http\\Controllers\\')->name('admin.')->group(function (){
 
+
+    Route::get('/user/create','AdminController@createUser')->name('admin.user.create');
+    Route::post('/user/store','AdminController@storeUser')->name('user.store');
+    Route::post('/user','AdminController@User')->name('user.index');
+
     //  ------- category route   ----------- //
     Route::prefix('category/')->name('category.')->group(function (){
         Route::get('create','CategoryController@create')               ->name('create');

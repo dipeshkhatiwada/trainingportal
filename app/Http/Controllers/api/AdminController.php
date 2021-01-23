@@ -7,9 +7,11 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Subcategory;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Pipeline;
+use Illuminate\Support\Str;
 use Laravel\Fortify\Actions\AttemptToAuthenticate;
 use Laravel\Fortify\Actions\EnsureLoginIsNotThrottled;
 use Laravel\Fortify\Actions\PrepareAuthenticatedSession;
@@ -21,46 +23,33 @@ use Laravel\Fortify\Http\Requests\LoginRequest;
 
 class AdminController extends Controller
 {
-    public function login(){
-//        dump('badui');
-//        dd('test');
-        return view('admin.login');
-    }
-    public function store(LoginRequest $request)
-    {
-        return $this->loginPipeline($request)->then(function ($request) {
-            return app(LoginResponse::class);
-        });
-    }
-    protected function loginPipeline(LoginRequest $request)
-    {
-        if (Fortify::$authenticateThroughCallback) {
-            return (new Pipeline(app()))->send($request)->through(array_filter(
-                call_user_func(Fortify::$authenticateThroughCallback, $request)
-            ));
+
+    public function store(Request $request){
+        $api_token = Str::random(30);
+        if (auth()->attempt([
+                'email' => $request->input('email'),
+                'password' => $request->input('password')
+            ],$request->has('remember')
+        )){
+            $user=User::where('email',$request->input('email'))->first();
+            User::where('id',$user->id)->update(['api_token'=>$api_token]);
+            return ['message'=>'Login Success . API Token is: '.$api_token,'status'=>true];
+//            redirect to admin dashboard
+        }else{
+            return ['message'=>'Username or Password is Incorrect','status'=>false];
         }
 
-        if (is_array(config('fortify.pipelines.login'))) {
-            return (new Pipeline(app()))->send($request)->through(array_filter(
-                config('fortify.pipelines.login')
-            ));
-        }
-
-        return (new Pipeline(app()))->send($request)->through(array_filter([
-            config('fortify.limiters.login') ? null : EnsureLoginIsNotThrottled::class,
-            Features::enabled(Features::twoFactorAuthentication()) ? RedirectIfTwoFactorAuthenticatable::class : null,
-            AttemptToAuthenticate::class,
-            PrepareAuthenticatedSession::class,
-        ]));
     }
-    public function logout(Request $request,StatefulGuard $guard){
-        $guard->logout();
+    public function logout(Request $request){
+        $user = User::where('api_token',$request->api_token)->get();
+        if (count($user)) {
+            User::where('id',$user[0]->id)->update(['api_token'=>null]);
+            return ['message'=>'User Logged out','status'=>true];
 
-        $request->session()->invalidate();
+        }else{
+            return ['message'=>'Invalid Token','status'=>true];
 
-        $request->session()->regenerateToken();
-
-        return redirect()->route('admin.login');
+        }
     }
 
     public function dashboard (){

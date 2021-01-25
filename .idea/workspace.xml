@@ -20,21 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d494a5f7-fef1-4448-9829-b739b4d13d7b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/api/CategoryController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/user/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/user/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/user/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/trainingportal.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/trainingportal.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/api/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/api/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -256,7 +242,8 @@
       <workItem from="1611114715412" duration="8000" />
       <workItem from="1611238793976" duration="3606000" />
       <workItem from="1611287662766" duration="83000" />
-      <workItem from="1611398138087" duration="7028000" />
+      <workItem from="1611398138087" duration="7691000" />
+      <workItem from="1611460639667" duration="39000" />
     </task>
     <servers />
   </component>

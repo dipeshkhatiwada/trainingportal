@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/','App\Http\Controllers\HomeController@index')->name('home.index');
-
+Route::get('/category/{slug}','App\Http\Controllers\HomeController@category')->name('home.category');
+Route::get('/subcategory/{cat_slug}/{sub_slug}','App\Http\Controllers\HomeController@subcategory')->name('home.subcategory');
+Route::get('/news/{slug}','App\Http\Controllers\HomeController@detail')->name('news.detail');
 Route::get('/contact-us','App\Http\Controllers\HomeController@contact')->name('home.contact');
 Route::post('/contact-us','App\Http\Controllers\HomeController@contactStore')->name('home.contact.store');
 
@@ -29,22 +31,6 @@ Route::get('/logout','App\Http\Controllers\AdminController@logout')->name('admin
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard','App\Http\Controllers\AdminController@dashboard')->name('dashboard');
 
-Route::get('category/create','App\Http\Controllers\CategoryController@create')               ->name('category.create');
-Route::get('category','App\Http\Controllers\CategoryController@index')                       ->name('category.index');
-Route::post('category/store','App\Http\Controllers\CategoryController@store')                ->name('category.store');
-Route::delete('category/delete/{id}','App\Http\Controllers\CategoryController@destroy')      ->name('category.delete');
-Route::get('category/edit/{id}','App\Http\Controllers\CategoryController@edit')              ->name('category.edit');
-Route::put('category/update/{id}','App\Http\Controllers\CategoryController@update')          ->name('category.update');
-
-
-////////////////////////////////////////////
-Route::get('/category/{slug}','App\Http\Controllers\HomeController@category')->name('home.category');
-Route::get('/subcategory/{cat_slug}/{sub_slug}','App\Http\Controllers\HomeController@subcategory')->name('home.subcategory');
-Route::get('/news/{slug}','App\Http\Controllers\HomeController@detail')->name('news.detail');
-
-
-
-
 Route::middleware(['auth:sanctum', 'verified'])->prefix('/admin/')->namespace('App\\Http\\Controllers\\')->name('admin.')->group(function (){
 
 
@@ -53,7 +39,15 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('/admin/')->namespace('A
     Route::post('/user','AdminController@User')->name('user.index');
 
     //  ------- category route   ----------- //
-   
+    Route::prefix('category/')->name('category.')->group(function (){
+        Route::get('create','CategoryController@create')               ->name('create');
+        Route::get('','CategoryController@index')                       ->name('index');
+        Route::post('store','CategoryController@store')                ->name('store');
+        Route::delete('delete/{id}','CategoryController@destroy')      ->name('delete');
+        Route::get('edit/{id}','CategoryController@edit')              ->name('edit');
+        Route::put('update/{id}','CategoryController@update')          ->name('update');
+
+    });
 
 //subcatgory route
     Route::get('subcategory/create','SubcategoryController@create')->name('subcategory.create');

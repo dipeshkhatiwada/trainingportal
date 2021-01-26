@@ -94,6 +94,21 @@ class HomeController extends Controller
     }
     public function contactStore(Request $request){
         $contact = Contact::create($request->all());
+        try {
+            $email=$data['email'];
+            //dd($email);
+            $val= [
+                'player' => $player ,
+            ];
+
+            Mail::send('email.player', $val, function ($message) use($email) {
+                $message->to($email, 'Player');
+                $message->subject('Player Registration Confirmaion mail');
+            });
+        }
+        catch (\Exception $e) {
+
+        }
         if ($contact){
             return 200;
         }else{

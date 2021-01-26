@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -101,9 +102,64 @@ class HomeController extends Controller
         $data=[];
         return view('home.contact',compact('data'));
     }
+
+    public static function forwardMail($view,$val,$email,$name,$subject){
+        try{
+            Mail::send($view, $val, function ($message) use($email,$name,$subject) {
+                $message->to($email, $name);
+                $message->subject($subject);
+            });
+        } catch (\Exception $e) {
+            return false;
+        }
+        return true;
+
+    }
+
     public function contactStore(Request $request){
         $contact = Contact::create($request->all());
+
+
         if ($contact){
+            $val= [
+                'contact' => $contact ,
+            ];
+            if($this->forwardMail('mail.contact',$val,$contact->email,$contact->name,'Mail Send')){
+                $request->session()->flash('success_message','Message  created');
+                return redirect()->route('home.contact');
+
+            }else{
+                $request->session()->flash('error_message','Mail  failed');
+                return redirect()->route('home.contact');
+
+            }
+//            try {
+//                $email='depeshkhatiwada@gmail.com';
+//                //dd($email);
+//                $val= [
+//                    'contact' => $contact ,
+//                ];
+//
+//                Mail::send('mail.contact', $val, function ($message) use($email) {
+//                    $message->to($email, 'Dipesh');
+//                    $message->subject('Contact Us information');
+//                });
+//                $email=$contact->email;
+//                $name=$contact->name;
+//                //dd($email);
+//                $val= [
+//                    'contact' => $contact ,
+//                ];
+//
+//                Mail::send('mail.contact_success', $val, function ($message) use($email,$name) {
+//                    $message->to($email, $name);
+//                    $message->subject('Contact Us information');
+//                });
+//            }
+//            catch (\Exception $e) {
+//                $request->session()->flash('error_message','Mail send Failed');
+//                return redirect()->route('home.contact');
+//            }
             $request->session()->flash('success_message','Message  created');
             return redirect()->route('home.contact');
         }else{

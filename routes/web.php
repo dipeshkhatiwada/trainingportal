@@ -78,6 +78,10 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('/admin/')->namespace('A
     Route::post('setting/store','SettingController@store')->name('setting.store');
     Route::post('setting/update/{id}','SettingController@update')->name('setting.update');
 
+    Route::get('role/assign/{id}','RoleController@assign')->name('role.assign');
+    Route::post('role/assign/{id}','RoleController@store')->name('role.assign');
+    Route::get('role',       'RoleController@index')->name('role.index');
+
 });
 
 

@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Category;
-use App\Models\User;
+use App\Models\Permission;
+use App\Models\Role;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class CategoryController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +18,9 @@ class CategoryController extends Controller
     public function index()
     {
         $data=[];
-        $data['categories']=Category::all();
+        $data['roles']=Role::all();
 //        dd($data['categories']);
-        return view('admin.category.index',compact('data'));
+        return view('admin.role.index',compact('data'));
     }
 
     /**
@@ -30,7 +30,6 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        dd(User::checkPermission('create_category'));
         return view('admin.category.create');
     }
 
@@ -40,12 +39,14 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(Request $request,$id)
     {
-        $data = Category::create($request->all());
-        if ($data){
-            $request->session()->flash('success_message','Category created Successfully  ! ');
-            return redirect()->route('admin.category.index');
+        $role = Role::find($id);
+//        $role->permissions()->delete();
+        $role->permissions()->sync($request->input('permission_id'));
+        if ($role){
+            $request->session()->flash('success_message','Permission assigned Successfully  ! ');
+            return redirect()->back();
 
         }else{
             $request->session()->flash('error_message','Something went wrong  ! ');
@@ -70,14 +71,16 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,$id)
+    public function assign(Request $request,$id)
     {
-        $data = Category::find($id);
-        if ($data){
-            return view('admin.category.edit',compact('data'));
+        $data['role'] = Role::find($id);
+        $data['perm'] = $data['role']->permissions()->pluck('permission_id')->toArray();
+        if ($data['role']){
+            $data['permission'] = Permission::pluck('name','id');
+            return view('admin.role.assign',compact('data'));
         }else{
             $request->session()->flash('error_message','Something went wrong  ! ');
-            return redirect()->route('admin.category.index');
+            return redirect()->route('admin.role.index');
         }
     }
 

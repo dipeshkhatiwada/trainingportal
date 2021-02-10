@@ -28,8 +28,8 @@
                             <h4>Date: {{ \Carbon\Carbon::parse($data['news']->created_at)->diffForHumans()}}</h4>
 {{--avoid <P> tag and other tag we use {!!  !!} sYNTAX--}}
                             {!! Str::limit( $data['news']->description, 380)!!} <a href="">Read more</a>
-
-{{--                            {!! $data['news']->description !!}--}}
+                            {!! $data['news']->description!!}
+                            {{--                            {!! $data['news']->description !!}--}}
                         </div>
                     </div>
                     <div class="fb-comments" data-href="{{\Illuminate\Support\Facades\Request::url()}}" data-width="" data-numposts="5"></div>

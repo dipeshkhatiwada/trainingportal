@@ -171,7 +171,11 @@
         });
     </script>
     <script>
-        CKEDITOR.replace( 'description' );
+        CKEDITOR.replace( 'description' ,{
+            allowedContent:true,
+            filebrowserUploadUrl: "{{route('admin.ckeditor.upload', ['_token' => csrf_token() ])}}",
+            filebrowserUploadMethod: 'form'
+        });
     </script>
     <script>
         $(document).ready(function () {

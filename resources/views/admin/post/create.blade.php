@@ -138,6 +138,7 @@
     <script src="{{asset('admin/plugins/select2/js/select2.full.min.js')}}"></script>
     <script>
         CKEDITOR.replace( 'description',{
+            allowedContent,
             filebrowserUploadUrl: "{{route('admin.ckeditor.upload', ['_token' => csrf_token() ])}}",
             filebrowserUploadMethod: 'form'
         } );

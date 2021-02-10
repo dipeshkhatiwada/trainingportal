@@ -41,6 +41,7 @@ class RoleController extends Controller
      */
     public function store(Request $request,$id)
     {
+//        dd($request);
         $role = Role::find($id);
 //        $role->permissions()->delete();
         $role->permissions()->sync($request->input('permission_id'));

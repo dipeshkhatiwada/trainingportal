@@ -17,10 +17,15 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $data=[];
-        $data['categories']=Category::all();
+        if(User::checkPermission('list_category')){
+            $data=[];
+            $data['categories']=Category::all();
 //        dd($data['categories']);
-        return view('admin.category.index',compact('data'));
+            return view('admin.category.index',compact('data'));
+        }else{
+            return  view('admin.error');
+        }
+
     }
 
     /**
@@ -30,8 +35,12 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        dd(User::checkPermission('create_category'));
-        return view('admin.category.create');
+        if(User::checkPermission('create_category')){
+            return view('admin.category.create');
+        }else{
+            return  view('admin.error');
+        }
+
     }
 
     /**

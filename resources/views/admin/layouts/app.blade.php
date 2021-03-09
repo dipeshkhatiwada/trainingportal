@@ -229,6 +229,15 @@
 <script src="{{asset('admin/plugins/summernote/summernote-bs4.min.js')}}"></script>
 <!-- overlayScrollbars -->
 <script src="{{asset('admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+<script>
+$(document).ready(function(){
+    setTimeout(
+  function() 
+  {
+      $(".os-content-glue").remove();
+  }, 1);
+});
+</script>
 
 @yield('js')
 <!-- AdminLTE App -->
